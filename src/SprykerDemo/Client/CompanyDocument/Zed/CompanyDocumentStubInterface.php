@@ -7,6 +7,11 @@
 
 namespace SprykerDemo\Client\CompanyDocument\Zed;
 
+use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
+use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
+use Generated\Shared\Transfer\CompanyDocumentsRequestTransfer;
+use Generated\Shared\Transfer\CompanyDocumentTransfer;
+
 interface CompanyDocumentStubInterface
 {
     /**

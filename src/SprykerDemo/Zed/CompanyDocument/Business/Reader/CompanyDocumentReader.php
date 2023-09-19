@@ -1,8 +1,8 @@
 <?php
 
 /**
- * This file is part of the Spryker Commerce OS.
- * For full license information, please view the LICENSE file that was distributed with this source code.
+ * Copyright © 2016-present Spryker Systems GmbH. All rights reserved.
+ * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
 namespace SprykerDemo\Zed\CompanyDocument\Business\Reader;
@@ -18,7 +18,7 @@ use SprykerDemo\Zed\FileManager\Business\FileManagerFacadeInterface;
 class CompanyDocumentReader implements CompanyDocumentReaderInterface
 {
     /**
-     * @var CompanyDocumentRepositoryInterface
+     * @var \SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentRepositoryInterface
      */
     protected CompanyDocumentRepositoryInterface $repository;
 
@@ -46,14 +46,19 @@ class CompanyDocumentReader implements CompanyDocumentReaderInterface
      */
     public function getCompanyDocumentsCollection(CompanyDocumentsRequestTransfer $companyDocumentsRequestTransfer): CompanyDocumentsCollectionTransfer
     {
-        $ids = $this->repository->getCompanyDocumentIds($companyDocumentsRequestTransfer->getCompanyName());
-        $files = $this->fileManager->getFilesByIds($ids);
+        $companyDocumentsCollectionTransfer = new CompanyDocumentsCollectionTransfer();
 
-        foreach ($files as &$file) {
-            $file->setContent('');
+        if ($companyDocumentsRequestTransfer->getCompanyName()) {
+            $ids = $this->repository->getCompanyDocumentIds($companyDocumentsRequestTransfer->getCompanyName());
+            $files = $this->fileManager->getFilesByIds($ids);
+
+            foreach ($files as $file) {
+                $file->setContent('');
+            }
+            $companyDocumentsCollectionTransfer->setFiles(new ArrayObject($files));
         }
 
-        return (new CompanyDocumentsCollectionTransfer())->setFiles(new ArrayObject($files));
+        return $companyDocumentsCollectionTransfer;
     }
 
     /**
@@ -63,14 +68,19 @@ class CompanyDocumentReader implements CompanyDocumentReaderInterface
      */
     public function getCompanyDocument(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentTransfer
     {
-        $availableFileIds = $this->repository->getCompanyDocumentIds($companyDocumentRequestTransfer->getCompanyName());
-        $availableFileIds = array_map('intval', $availableFileIds);
-        if (!in_array((int)$companyDocumentRequestTransfer->getIdFile(), $availableFileIds, true)) {
-            return new CompanyDocumentTransfer();
+        $companyDocumentTransfer = new CompanyDocumentTransfer();
+        if ($companyDocumentRequestTransfer->getCompanyName()) {
+            $availableFileIds = $this->repository->getCompanyDocumentIds($companyDocumentRequestTransfer->getCompanyName());
+            $availableFileIds = array_map('intval', $availableFileIds);
+            if (in_array((int)$companyDocumentRequestTransfer->getIdFile(), $availableFileIds, true) && $companyDocumentRequestTransfer->getIdFile()) {
+                $file = $this->fileManager->findFileByIdFile($companyDocumentRequestTransfer->getIdFile());
+                if ($file->getContent()) {
+                    $file->setContent(base64_encode($file->getContent()));
+                    $companyDocumentTransfer->setFile($file);
+                }
+            }
         }
-        $file = $this->fileManager->findFileByIdFile($companyDocumentRequestTransfer->getIdFile());
-        $file->setContent(base64_encode($file->getContent()));
 
-        return (new CompanyDocumentTransfer())->setFile($file);
+        return $companyDocumentTransfer;
     }
 }

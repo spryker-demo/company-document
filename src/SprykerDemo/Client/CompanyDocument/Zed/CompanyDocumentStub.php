@@ -7,7 +7,10 @@
 
 namespace SprykerDemo\Client\CompanyDocument\Zed;
 
-use Spryker\Client\Kernel\AbstractFactory;
+use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
+use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
+use Generated\Shared\Transfer\CompanyDocumentsRequestTransfer;
+use Generated\Shared\Transfer\CompanyDocumentTransfer;
 use Spryker\Client\ZedRequest\Stub\ZedRequestStub;
 
 class CompanyDocumentStub extends ZedRequestStub implements CompanyDocumentStubInterface
@@ -37,5 +40,4 @@ class CompanyDocumentStub extends ZedRequestStub implements CompanyDocumentStubI
 
         return $companyDocumentTransfer;
     }
-
 }
