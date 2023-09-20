@@ -20,9 +20,9 @@ class CompanyDocumentBusinessFactory extends AbstractBusinessFactory
     /**
      * @return \SprykerDemo\Zed\FileManager\Business\FileManagerFacadeInterface
      */
-    public function getFileManager(): FileManagerFacadeInterface
+    public function getFileManagerFacade(): FileManagerFacadeInterface
     {
-        return $this->getProvidedDependency(CompanyDocumentDependencyProvider::SERVICE_FILE_SYSTEM);
+        return $this->getProvidedDependency(CompanyDocumentDependencyProvider::FACADE_FILE_MANAGER);
     }
 
     /**
@@ -32,7 +32,7 @@ class CompanyDocumentBusinessFactory extends AbstractBusinessFactory
     {
         return new CompanyDocumentReader(
             $this->getRepository(),
-            $this->getFileManager(),
+            $this->getFileManagerFacade(),
         );
     }
 }

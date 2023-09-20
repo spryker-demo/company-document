@@ -7,17 +7,17 @@
 
 namespace SprykerDemo\Zed\CompanyDocument\Persistence;
 
-use Orm\Zed\FileManager\Persistence\SpyFileDirectoryQuery;
+use Orm\Zed\FileManager\Persistence\SpyFileQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 use SprykerDemo\Zed\CompanyDocument\CompanyDocumentDependencyProvider;
 
 class CompanyDocumentPersistenceFactory extends AbstractPersistenceFactory
 {
     /**
-     * @return \Orm\Zed\FileManager\Persistence\SpyFileDirectoryQuery
+     * @return \Orm\Zed\FileManager\Persistence\SpyFileQuery
      */
-    public function getFileDirectoryQuery(): SpyFileDirectoryQuery
+    public function getFileQuery(): SpyFileQuery
     {
-        return $this->getProvidedDependency(CompanyDocumentDependencyProvider::QUERY_FILE_DIRECTORY);
+        return $this->getProvidedDependency(CompanyDocumentDependencyProvider::QUERY_FILE);
     }
 }

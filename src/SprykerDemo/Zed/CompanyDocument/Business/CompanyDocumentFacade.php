@@ -31,7 +31,7 @@ class CompanyDocumentFacade extends AbstractFacade implements CompanyDocumentFac
     {
         return $this->getFactory()
             ->createCompanyDocumentReader()
-            ->getCompanyDocumentsCollection($companyDocumentsRequestTransfer);
+            ->getCompanyDocumentCollection($companyDocumentsRequestTransfer);
     }
 
     /**

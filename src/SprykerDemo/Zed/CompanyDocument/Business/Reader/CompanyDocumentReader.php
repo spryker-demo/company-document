@@ -25,18 +25,18 @@ class CompanyDocumentReader implements CompanyDocumentReaderInterface
     /**
      * @var \SprykerDemo\Zed\FileManager\Business\FileManagerFacadeInterface
      */
-    protected FileManagerFacadeInterface $fileManager;
+    protected FileManagerFacadeInterface $fileManagerFacade;
 
     /**
      * @param \SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentRepositoryInterface $repository
-     * @param \SprykerDemo\Zed\FileManager\Business\FileManagerFacadeInterface $fileManager
+     * @param \SprykerDemo\Zed\FileManager\Business\FileManagerFacadeInterface $fileManagerFacade
      */
     public function __construct(
         CompanyDocumentRepositoryInterface $repository,
-        FileManagerFacadeInterface $fileManager
+        FileManagerFacadeInterface $fileManagerFacade
     ) {
         $this->repository = $repository;
-        $this->fileManager = $fileManager;
+        $this->fileManagerFacade = $fileManagerFacade;
     }
 
     /**
@@ -44,13 +44,13 @@ class CompanyDocumentReader implements CompanyDocumentReaderInterface
      *
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function getCompanyDocumentsCollection(CompanyDocumentsRequestTransfer $companyDocumentsRequestTransfer): CompanyDocumentsCollectionTransfer
+    public function getCompanyDocumentCollection(CompanyDocumentsRequestTransfer $companyDocumentsRequestTransfer): CompanyDocumentsCollectionTransfer
     {
         $companyDocumentsCollectionTransfer = new CompanyDocumentsCollectionTransfer();
 
         if ($companyDocumentsRequestTransfer->getCompanyName()) {
             $ids = $this->repository->getCompanyDocumentIds($companyDocumentsRequestTransfer->getCompanyName());
-            $files = $this->fileManager->getFilesByIds($ids);
+            $files = $this->fileManagerFacade->getFilesByIds($ids);
 
             foreach ($files as $file) {
                 $file->setContent('');
@@ -69,15 +69,11 @@ class CompanyDocumentReader implements CompanyDocumentReaderInterface
     public function getCompanyDocument(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentTransfer
     {
         $companyDocumentTransfer = new CompanyDocumentTransfer();
-        if ($companyDocumentRequestTransfer->getCompanyName()) {
-            $availableFileIds = $this->repository->getCompanyDocumentIds($companyDocumentRequestTransfer->getCompanyName());
-            $availableFileIds = array_map('intval', $availableFileIds);
-            if (in_array((int)$companyDocumentRequestTransfer->getIdFile(), $availableFileIds, true) && $companyDocumentRequestTransfer->getIdFile()) {
-                $file = $this->fileManager->findFileByIdFile($companyDocumentRequestTransfer->getIdFile());
-                if ($file->getContent()) {
-                    $file->setContent(base64_encode($file->getContent()));
-                    $companyDocumentTransfer->setFile($file);
-                }
+        if ($this->repository->checkFileExistence($companyDocumentRequestTransfer) && $companyDocumentRequestTransfer->getIdFile()) {
+            $file = $this->fileManagerFacade->findFileByIdFile($companyDocumentRequestTransfer->getIdFile());
+            if ($file->getContent()) {
+                $file->setContent(base64_encode($file->getContent()));
+                $companyDocumentTransfer->setFile($file);
             }
         }
 

@@ -7,6 +7,8 @@
 
 namespace SprykerDemo\Zed\CompanyDocument\Persistence;
 
+use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
+use Orm\Zed\FileManager\Persistence\Map\SpyFileTableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -21,20 +23,31 @@ class CompanyDocumentRepository extends AbstractRepository implements CompanyDoc
      */
     public function getCompanyDocumentIds(string $companyName): array
     {
-        $directories = $this->getFactory()
-            ->getFileDirectoryQuery()
-            ->findByName($companyName);
+        return $this->getFactory()
+            ->getFileQuery()
+            ->select(SpyFileTableMap::COL_ID_FILE)
+            ->joinWithFileDirectory()
+            ->useFileDirectoryQuery()
+                ->filterByName($companyName)
+            ->endUse()
+            ->find()
+            ->toArray();
+    }
 
-        if ($directories->count() === 0) {
-            return [];
-        }
-
-        $primaryKeys = [];
-
-        foreach ($directories as $directory) {
-            $primaryKeys[] = array_values($directory->getSpyFiles()->getPrimaryKeys());
-        }
-
-        return array_merge(...$primaryKeys);
+    /**
+     * @param \Generated\Shared\Transfer\CompanyDocumentRequestTransfer $companyDocumentRequestTransfer
+     *
+     * @return bool
+     */
+    public function checkFileExistence(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): bool
+    {
+        return $this->getFactory()
+            ->getFileQuery()
+            ->filterByIdFile($companyDocumentRequestTransfer->getIdFile())
+            ->joinWithFileDirectory()
+            ->useFileDirectoryQuery()
+                ->filterByName($companyDocumentRequestTransfer->getCompanyName())
+            ->endUse()
+            ->exists();
     }
 }
