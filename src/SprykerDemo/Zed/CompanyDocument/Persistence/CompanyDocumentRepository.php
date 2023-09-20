@@ -8,6 +8,7 @@
 namespace SprykerDemo\Zed\CompanyDocument\Persistence;
 
 use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
+use Generated\Shared\Transfer\FileTransfer;
 use Orm\Zed\FileManager\Persistence\Map\SpyFileTableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
@@ -48,6 +49,20 @@ class CompanyDocumentRepository extends AbstractRepository implements CompanyDoc
             ->useFileDirectoryQuery()
                 ->filterByName($companyDocumentRequestTransfer->getCompanyName())
             ->endUse()
+            ->exists();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\FileTransfer $fileTransfer
+     *
+     * @return bool
+     */
+    public function checkFileNameExistence(FileTransfer $fileTransfer): bool
+    {
+        return $this->getFactory()
+            ->getFileQuery()
+            ->filterByFileName($fileTransfer->getFileName())
+            ->filterByFkFileDirectory($fileTransfer->getFkFileDirectory())
             ->exists();
     }
 }
