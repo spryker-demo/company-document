@@ -8,7 +8,7 @@
 namespace SprykerDemo\Zed\CompanyDocument\Business\Validator;
 
 use Generated\Shared\Transfer\FileTransfer;
-use SprykerDemo\Service\CompanyDocument\Exception\DuplicateFileNameException;
+use SprykerDemo\Zed\CompanyDocument\Business\Exception\DuplicateFileNameException;
 use SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentRepositoryInterface;
 
 class CompanyDocumentValidator implements CompanyDocumentValidatorInterface
@@ -30,7 +30,7 @@ class CompanyDocumentValidator implements CompanyDocumentValidatorInterface
     /**
      * @param \Generated\Shared\Transfer\FileTransfer $fileTransfer
      *
-     * @throws \SprykerDemo\Service\CompanyDocument\Exception\DuplicateFileNameException
+     * @throws \SprykerDemo\Zed\CompanyDocument\Business\Exception\DuplicateFileNameException
      *
      * @return void
      */
