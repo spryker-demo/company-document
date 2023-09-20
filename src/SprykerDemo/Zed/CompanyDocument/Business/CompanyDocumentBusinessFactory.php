@@ -9,6 +9,7 @@ namespace SprykerDemo\Zed\CompanyDocument\Business;
 
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerDemo\Zed\CompanyDocument\Business\Reader\CompanyDocumentReader;
+use SprykerDemo\Zed\CompanyDocument\Business\Reader\CompanyDocumentReaderInterface;
 use SprykerDemo\Zed\CompanyDocument\CompanyDocumentDependencyProvider;
 use SprykerDemo\Zed\FileManager\Business\FileManagerFacadeInterface;
 
@@ -26,13 +27,23 @@ class CompanyDocumentBusinessFactory extends AbstractBusinessFactory
     }
 
     /**
-     * @return \SprykerDemo\Zed\CompanyDocument\Business\Reader\CompanyDocumentReader
+     * @return \SprykerDemo\Zed\CompanyDocument\Business\Reader\CompanyDocumentReaderInterface
      */
-    public function createCompanyDocumentReader(): CompanyDocumentReader
+    public function createCompanyDocumentReader(): CompanyDocumentReaderInterface
     {
         return new CompanyDocumentReader(
             $this->getRepository(),
             $this->getFileManagerFacade(),
+        );
+    }
+
+    /**
+     * @return \SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidatorInterface
+     */
+    public function createCompanyDocumentValidator(): CompanyDocumentValidatorInterface
+    {
+        return new CompanyDocumentValidator(
+            $this->getRepository(),
         );
     }
 }

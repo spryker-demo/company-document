@@ -69,7 +69,7 @@ class CompanyDocumentReader implements CompanyDocumentReaderInterface
     public function getCompanyDocument(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentTransfer
     {
         $companyDocumentTransfer = new CompanyDocumentTransfer();
-        if ($this->repository->checkFileExistence($companyDocumentRequestTransfer) && $companyDocumentRequestTransfer->getIdFile()) {
+        if ($companyDocumentRequestTransfer->getIdFile() && $this->repository->checkFileExistence($companyDocumentRequestTransfer)) {
             $file = $this->fileManagerFacade->findFileByIdFile($companyDocumentRequestTransfer->getIdFile());
             if ($file->getContent()) {
                 $file->setContent(base64_encode($file->getContent()));

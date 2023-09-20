@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentTransfer;
+use SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidatorInterface;
 
 interface CompanyDocumentFacadeInterface
 {
@@ -37,4 +38,14 @@ interface CompanyDocumentFacadeInterface
      * @return \Generated\Shared\Transfer\CompanyDocumentTransfer
      */
     public function getCompanyDocument(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentTransfer;
+
+    /**
+     * Specification:
+     * - Creates new CompanyDocumentValidator class.
+     *
+     * @api
+     *
+     * @return \SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidatorInterface
+     */
+    public function createCompanyDocumentValidator(): CompanyDocumentValidatorInterface;
 }

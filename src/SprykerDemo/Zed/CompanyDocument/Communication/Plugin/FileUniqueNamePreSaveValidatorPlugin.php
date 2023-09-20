@@ -12,7 +12,7 @@ use Spryker\Zed\Kernel\Communication\AbstractPlugin;
 use SprykerDemo\Zed\FileManager\Dependency\Plugin\FilePreSaveValidatorPluginInterface;
 
 /**
- * @method \SprykerDemo\Zed\CompanyDocument\Communication\CompanyDocumentCommunicationFactory getFactory()
+ * @method \SprykerDemo\Zed\CompanyDocument\Business\CompanyDocumentFacadeInterface getFacade()
  */
 class FileUniqueNamePreSaveValidatorPlugin extends AbstractPlugin implements FilePreSaveValidatorPluginInterface
 {
@@ -28,6 +28,6 @@ class FileUniqueNamePreSaveValidatorPlugin extends AbstractPlugin implements Fil
   */
     public function validate(FileTransfer $fileTransfer): void
     {
-        $this->getFactory()->createCompanyDocumentValidator()->validateFileNameUniqueness($fileTransfer);
+        $this->getFacade()->createCompanyDocumentValidator()->validateFileNameUniqueness($fileTransfer);
     }
 }

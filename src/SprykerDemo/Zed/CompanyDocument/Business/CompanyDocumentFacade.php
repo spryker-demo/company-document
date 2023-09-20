@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
+use SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidatorInterface;
 
 /**
  * @method \SprykerDemo\Zed\CompanyDocument\Business\CompanyDocumentBusinessFactory getFactory()
@@ -48,5 +49,18 @@ class CompanyDocumentFacade extends AbstractFacade implements CompanyDocumentFac
         return $this->getFactory()
             ->createCompanyDocumentReader()
             ->getCompanyDocument($companyDocumentRequestTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @return \SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidatorInterface
+     */
+    public function createCompanyDocumentValidator(): CompanyDocumentValidatorInterface
+    {
+        return $this->getFactory()
+            ->createCompanyDocumentValidator();
     }
 }
