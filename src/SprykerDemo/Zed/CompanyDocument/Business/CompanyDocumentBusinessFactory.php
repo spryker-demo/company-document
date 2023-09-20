@@ -10,6 +10,8 @@ namespace SprykerDemo\Zed\CompanyDocument\Business;
 use Spryker\Zed\Kernel\Business\AbstractBusinessFactory;
 use SprykerDemo\Zed\CompanyDocument\Business\Reader\CompanyDocumentReader;
 use SprykerDemo\Zed\CompanyDocument\Business\Reader\CompanyDocumentReaderInterface;
+use SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidator;
+use SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidatorInterface;
 use SprykerDemo\Zed\CompanyDocument\CompanyDocumentDependencyProvider;
 use SprykerDemo\Zed\FileManager\Business\FileManagerFacadeInterface;
 
