@@ -21,14 +21,21 @@ class CompanyDocumentRepository extends AbstractRepository implements CompanyDoc
      */
     public function getCompanyDocumentIds(string $companyName): array
     {
-        $directory = $this->getFactory()
+        $directories = $this->getFactory()
             ->getFileDirectoryQuery()
-            ->findOneByName($companyName);
+            ->findByName($companyName);
 
-        if ($directory === null) {
+        if ($directories->count() === 0) {
             return [];
         }
 
-        return $directory->getSpyFiles()->getPrimaryKeys();
+        $primaryKeys = [];
+
+        foreach ($directories as $directory) {
+            $primaryKeys[] = array_values($directory->getSpyFiles()->getPrimaryKeys());
+        }
+        $primaryKeys = array_merge(...$primaryKeys);
+
+        return $primaryKeys;
     }
 }
