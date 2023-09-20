@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentTransfer;
-use SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidatorInterface;
+use Generated\Shared\Transfer\FileTransfer;
 
 interface CompanyDocumentFacadeInterface
 {
@@ -41,11 +41,13 @@ interface CompanyDocumentFacadeInterface
 
     /**
      * Specification:
-     * - Creates new CompanyDocumentValidator class.
+     * - Checks if file name exists in the same directory or not to avoid duplicates.
      *
      * @api
      *
-     * @return \SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidatorInterface
+     * @param \Generated\Shared\Transfer\FileTransfer $fileTransfer
+     *
+     * @return void
      */
-    public function createCompanyDocumentValidator(): CompanyDocumentValidatorInterface;
+    public function validateFileNameUniqueness(FileTransfer $fileTransfer): void;
 }

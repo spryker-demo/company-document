@@ -28,6 +28,6 @@ class FileUniqueNamePreSaveValidatorPlugin extends AbstractPlugin implements Fil
   */
     public function validate(FileTransfer $fileTransfer): void
     {
-        $this->getFacade()->createCompanyDocumentValidator()->validateFileNameUniqueness($fileTransfer);
+        $this->getFacade()->validateFileNameUniqueness($fileTransfer);
     }
 }

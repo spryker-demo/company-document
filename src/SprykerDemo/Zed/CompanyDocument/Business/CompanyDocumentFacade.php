@@ -11,8 +11,8 @@ use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentTransfer;
+use Generated\Shared\Transfer\FileTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
-use SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidatorInterface;
 
 /**
  * @method \SprykerDemo\Zed\CompanyDocument\Business\CompanyDocumentBusinessFactory getFactory()
@@ -56,11 +56,14 @@ class CompanyDocumentFacade extends AbstractFacade implements CompanyDocumentFac
      *
      * @api
      *
-     * @return \SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidatorInterface
+     * @param \Generated\Shared\Transfer\FileTransfer $fileTransfer
+     *
+     * @return void
      */
-    public function createCompanyDocumentValidator(): CompanyDocumentValidatorInterface
+    public function validateFileNameUniqueness(FileTransfer $fileTransfer): void
     {
-        return $this->getFactory()
-            ->createCompanyDocumentValidator();
+        $this->getFactory()
+            ->createCompanyDocumentValidator()
+            ->validateFileNameUniqueness($fileTransfer);
     }
 }
