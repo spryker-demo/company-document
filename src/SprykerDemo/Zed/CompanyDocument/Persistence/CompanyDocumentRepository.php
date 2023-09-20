@@ -34,8 +34,7 @@ class CompanyDocumentRepository extends AbstractRepository implements CompanyDoc
         foreach ($directories as $directory) {
             $primaryKeys[] = array_values($directory->getSpyFiles()->getPrimaryKeys());
         }
-        $primaryKeys = array_merge(...$primaryKeys);
 
-        return $primaryKeys;
+        return array_merge(...$primaryKeys);
     }
 }
