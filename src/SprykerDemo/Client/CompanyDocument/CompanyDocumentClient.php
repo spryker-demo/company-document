@@ -9,8 +9,6 @@ namespace SprykerDemo\Client\CompanyDocument;
 
 use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
-use Generated\Shared\Transfer\CompanyDocumentsRequestTransfer;
-use Generated\Shared\Transfer\CompanyDocumentTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
@@ -23,30 +21,14 @@ class CompanyDocumentClient extends AbstractClient implements CompanyDocumentCli
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\CompanyDocumentsRequestTransfer $companyDocumentsRequestTransfer
+     * @param \Generated\Shared\Transfer\CompanyDocumentRequestTransfer $companyDocumentRequestTransfer
      *
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function getCompanyDocuments(CompanyDocumentsRequestTransfer $companyDocumentsRequestTransfer): CompanyDocumentsCollectionTransfer
+    public function getCompanyDocuments(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentsCollectionTransfer
     {
         return $this->getFactory()
             ->createZedStub()
-            ->getCompanyDocuments($companyDocumentsRequestTransfer);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\CompanyDocumentRequestTransfer $companyDocumentRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyDocumentTransfer
-     */
-    public function getCompanyDocument(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentTransfer
-    {
-        return $this->getFactory()
-            ->createZedStub()
-            ->getCompanyDocument($companyDocumentRequestTransfer);
+            ->getCompanyDocuments($companyDocumentRequestTransfer);
     }
 }

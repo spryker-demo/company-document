@@ -9,8 +9,6 @@ namespace SprykerDemo\Client\CompanyDocument;
 
 use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
-use Generated\Shared\Transfer\CompanyDocumentsRequestTransfer;
-use Generated\Shared\Transfer\CompanyDocumentTransfer;
 
 interface CompanyDocumentClientInterface
 {
@@ -20,21 +18,9 @@ interface CompanyDocumentClientInterface
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\CompanyDocumentsRequestTransfer $companyDocumentsRequestTransfer
+     * @param \Generated\Shared\Transfer\CompanyDocumentRequestTransfer $companyDocumentRequestTransfer
      *
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function getCompanyDocuments(CompanyDocumentsRequestTransfer $companyDocumentsRequestTransfer): CompanyDocumentsCollectionTransfer;
-
-    /**
-     * Specification:
-     * - Gets one document by id inside a folder with company name
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\CompanyDocumentRequestTransfer $companyDocumentRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyDocumentTransfer
-     */
-    public function getCompanyDocument(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentTransfer;
+    public function getCompanyDocuments(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentsCollectionTransfer;
 }

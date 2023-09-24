@@ -9,8 +9,6 @@ namespace SprykerDemo\Zed\CompanyDocument\Business;
 
 use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
-use Generated\Shared\Transfer\CompanyDocumentsRequestTransfer;
-use Generated\Shared\Transfer\CompanyDocumentTransfer;
 use Generated\Shared\Transfer\FileTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -24,31 +22,15 @@ class CompanyDocumentFacade extends AbstractFacade implements CompanyDocumentFac
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\CompanyDocumentsRequestTransfer $companyDocumentsRequestTransfer
+     * @param \Generated\Shared\Transfer\CompanyDocumentRequestTransfer $companyDocumentRequestTransfer
      *
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function getCompanyDocumentCollection(CompanyDocumentsRequestTransfer $companyDocumentsRequestTransfer): CompanyDocumentsCollectionTransfer
+    public function getCompanyDocumentsCollection(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentsCollectionTransfer
     {
         return $this->getFactory()
             ->createCompanyDocumentReader()
-            ->getCompanyDocumentCollection($companyDocumentsRequestTransfer);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\CompanyDocumentRequestTransfer $companyDocumentRequestTransfer
-     *
-     * @return \Generated\Shared\Transfer\CompanyDocumentTransfer
-     */
-    public function getCompanyDocument(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentTransfer
-    {
-        return $this->getFactory()
-            ->createCompanyDocumentReader()
-            ->getCompanyDocument($companyDocumentRequestTransfer);
+            ->getCompanyDocumentsCollection($companyDocumentRequestTransfer);
     }
 
     /**

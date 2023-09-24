@@ -12,30 +12,19 @@ use SprykerDemo\Zed\CompanyDocument\Business\Reader\CompanyDocumentReader;
 use SprykerDemo\Zed\CompanyDocument\Business\Reader\CompanyDocumentReaderInterface;
 use SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidator;
 use SprykerDemo\Zed\CompanyDocument\Business\Validator\CompanyDocumentValidatorInterface;
-use SprykerDemo\Zed\CompanyDocument\CompanyDocumentDependencyProvider;
-use SprykerDemo\Zed\FileManager\Business\FileManagerFacadeInterface;
 
 /**
  * @method \SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentRepositoryInterface getRepository()
  */
 class CompanyDocumentBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \SprykerDemo\Zed\FileManager\Business\FileManagerFacadeInterface
-     */
-    public function getFileManagerFacade(): FileManagerFacadeInterface
-    {
-        return $this->getProvidedDependency(CompanyDocumentDependencyProvider::FACADE_FILE_MANAGER);
-    }
-
-    /**
-     * @return \SprykerDemo\Zed\CompanyDocument\Business\Reader\CompanyDocumentReaderInterface
-     */
+ /**
+  * @return \SprykerDemo\Zed\CompanyDocument\Business\Reader\CompanyDocumentReaderInterface
+  */
     public function createCompanyDocumentReader(): CompanyDocumentReaderInterface
     {
         return new CompanyDocumentReader(
             $this->getRepository(),
-            $this->getFileManagerFacade(),
         );
     }
 

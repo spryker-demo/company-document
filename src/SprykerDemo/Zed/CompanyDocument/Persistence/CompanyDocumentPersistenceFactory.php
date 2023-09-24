@@ -10,6 +10,7 @@ namespace SprykerDemo\Zed\CompanyDocument\Persistence;
 use Orm\Zed\FileManager\Persistence\SpyFileQuery;
 use Spryker\Zed\Kernel\Persistence\AbstractPersistenceFactory;
 use SprykerDemo\Zed\CompanyDocument\CompanyDocumentDependencyProvider;
+use SprykerDemo\Zed\CompanyDocument\Persistence\Mapper\CompanyDocumentMapper;
 
 class CompanyDocumentPersistenceFactory extends AbstractPersistenceFactory
 {
@@ -19,5 +20,13 @@ class CompanyDocumentPersistenceFactory extends AbstractPersistenceFactory
     public function getFileQuery(): SpyFileQuery
     {
         return $this->getProvidedDependency(CompanyDocumentDependencyProvider::QUERY_FILE);
+    }
+
+    /**
+     * @return \SprykerDemo\Zed\CompanyDocument\Persistence\Mapper\CompanyDocumentMapper
+     */
+    public function createCompanyDocumentMapper(): CompanyDocumentMapper
+    {
+        return new CompanyDocumentMapper();
     }
 }

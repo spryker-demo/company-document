@@ -3,19 +3,16 @@
 
     <transfer name="CompanyDocumentRequest">
         <property name="companyName" type="string"/>
-        <property name="idFile" type="int"/>
-    </transfer>
-
-    <transfer name="CompanyDocumentsRequest">
-        <property name="companyName" type="string"/>
     </transfer>
 
     <transfer name="CompanyDocument">
-        <property name="file" type="FileManagerData"/>
+        <property name="idFile" type="int"/>
+        <property name="fileName" type="string"/>
+        <property name="createdAt" type="string"/>
     </transfer>
 
     <transfer name="CompanyDocumentsCollection">
-        <property name="files" type="FileManagerData[]" singular="file"/>
+        <property name="documents" type="CompanyDocument[]" singular="document"/>
     </transfer>
 
 </transfers>

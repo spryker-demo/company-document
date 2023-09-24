@@ -16,24 +16,7 @@ class CompanyDocumentDependencyProvider extends AbstractBundleDependencyProvider
     /**
      * @var string
      */
-    public const FACADE_FILE_MANAGER = 'FACADE_FILE_MANAGER';
-
-    /**
-     * @var string
-     */
     public const QUERY_FILE = 'QUERY_FILE';
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
-    public function provideBusinessLayerDependencies(Container $container): Container
-    {
-        $container = $this->addFileManagerFacade($container);
-
-        return $container;
-    }
 
     /**
      * @param \Spryker\Zed\Kernel\Container $container
@@ -43,20 +26,6 @@ class CompanyDocumentDependencyProvider extends AbstractBundleDependencyProvider
     public function providePersistenceLayerDependencies(Container $container): Container
     {
         $container = $this->addFileQuery($container);
-
-        return $container;
-    }
-
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
-    protected function addFileManagerFacade(Container $container): Container
-    {
-        $container->set(static::FACADE_FILE_MANAGER, function (Container $container) {
-            return $container->getLocator()->fileManager()->facade();
-        });
 
         return $container;
     }

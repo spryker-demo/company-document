@@ -7,9 +7,8 @@
 
 namespace SprykerDemo\Zed\CompanyDocument\Persistence;
 
-use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
+use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 use Generated\Shared\Transfer\FileTransfer;
-use Orm\Zed\FileManager\Persistence\Map\SpyFileTableMap;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
@@ -20,36 +19,23 @@ class CompanyDocumentRepository extends AbstractRepository implements CompanyDoc
     /**
      * @param string $companyName
      *
-     * @return array<int>
+     * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function getCompanyDocumentIds(string $companyName): array
+    public function getCompanyDocuments(string $companyName): CompanyDocumentsCollectionTransfer
     {
-        return $this->getFactory()
+        $spyFileEntities = $this->getFactory()
             ->getFileQuery()
-            ->select(SpyFileTableMap::COL_ID_FILE)
+            ->joinWithSpyFileInfo()
             ->joinWithFileDirectory()
-            ->useFileDirectoryQuery()
-                ->filterByName($companyName)
-            ->endUse()
+                ->useFileDirectoryQuery()
+                    ->filterByName($companyName)
+                ->endUse()
             ->find()
             ->toArray();
-    }
 
-    /**
-     * @param \Generated\Shared\Transfer\CompanyDocumentRequestTransfer $companyDocumentRequestTransfer
-     *
-     * @return bool
-     */
-    public function checkFileExistence(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): bool
-    {
         return $this->getFactory()
-            ->getFileQuery()
-            ->filterByIdFile($companyDocumentRequestTransfer->getIdFile())
-            ->joinWithFileDirectory()
-            ->useFileDirectoryQuery()
-                ->filterByName($companyDocumentRequestTransfer->getCompanyName())
-            ->endUse()
-            ->exists();
+            ->createCompanyDocumentMapper()
+            ->mapSpyFileEntitiesToCompanyDocumentsCollectionTransfer($spyFileEntities);
     }
 
     /**
