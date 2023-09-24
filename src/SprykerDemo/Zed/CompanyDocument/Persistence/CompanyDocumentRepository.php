@@ -30,8 +30,7 @@ class CompanyDocumentRepository extends AbstractRepository implements CompanyDoc
                 ->useFileDirectoryQuery()
                     ->filterByName($companyName)
                 ->endUse()
-            ->find()
-            ->toArray();
+            ->find();
 
         return $this->getFactory()
             ->createCompanyDocumentMapper()

@@ -9,23 +9,24 @@ namespace SprykerDemo\Zed\CompanyDocument\Persistence\Mapper;
 
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 use Generated\Shared\Transfer\CompanyDocumentTransfer;
+use Propel\Runtime\Collection\ObjectCollection;
 
 class CompanyDocumentMapper
 {
     /**
-     * @param array<\Orm\Zed\FileManager\Persistence\SpyFile> $files
+     * @param \Propel\Runtime\Collection\ObjectCollection $files
      *
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function mapSpyFileEntitiesToCompanyDocumentsCollectionTransfer(array $files): CompanyDocumentsCollectionTransfer
+    public function mapSpyFileEntitiesToCompanyDocumentsCollectionTransfer(ObjectCollection $files): CompanyDocumentsCollectionTransfer
     {
         $companyDocumentsCollectionTransfer = new CompanyDocumentsCollectionTransfer();
 
         foreach ($files as $file) {
             $companyDocumentTransfer = new CompanyDocumentTransfer();
-            $companyDocumentTransfer->setFileName($file['FileName']);
-            $companyDocumentTransfer->setIdFile($file['IdFile']);
-            $companyDocumentTransfer->setCreatedAt($file['SpyFileInfos'][0]['CreatedAt']);
+            $companyDocumentTransfer->setFileName($file->getFileName());
+            $companyDocumentTransfer->setIdFile($file->getIdFile());
+            $companyDocumentTransfer->setCreatedAt(($file->getSpyFileInfos()->getFirst()?->getCreatedAt())->format('Y-m-d H:i:s'));
 
             $companyDocumentsCollectionTransfer->addDocument($companyDocumentTransfer);
         }
