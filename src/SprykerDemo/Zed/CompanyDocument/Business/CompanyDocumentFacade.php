@@ -9,7 +9,6 @@ namespace SprykerDemo\Zed\CompanyDocument\Business;
 
 use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
-use Generated\Shared\Transfer\FileTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
@@ -31,21 +30,5 @@ class CompanyDocumentFacade extends AbstractFacade implements CompanyDocumentFac
         return $this->getFactory()
             ->createCompanyDocumentReader()
             ->getCompanyDocumentsCollection($companyDocumentRequestTransfer);
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\FileTransfer $fileTransfer
-     *
-     * @return void
-     */
-    public function validateFileNameUniqueness(FileTransfer $fileTransfer): void
-    {
-        $this->getFactory()
-            ->createCompanyDocumentValidator()
-            ->validateFileNameUniqueness($fileTransfer);
     }
 }

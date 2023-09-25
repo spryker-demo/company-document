@@ -9,7 +9,6 @@ namespace SprykerDemo\Zed\CompanyDocument\Business;
 
 use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
-use Generated\Shared\Transfer\FileTransfer;
 
 interface CompanyDocumentFacadeInterface
 {
@@ -24,16 +23,4 @@ interface CompanyDocumentFacadeInterface
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
     public function getCompanyDocumentsCollection(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentsCollectionTransfer;
-
-    /**
-     * Specification:
-     * - Checks if file name exists in the same directory or not to avoid duplicates.
-     *
-     * @api
-     *
-     * @param \Generated\Shared\Transfer\FileTransfer $fileTransfer
-     *
-     * @return void
-     */
-    public function validateFileNameUniqueness(FileTransfer $fileTransfer): void;
 }

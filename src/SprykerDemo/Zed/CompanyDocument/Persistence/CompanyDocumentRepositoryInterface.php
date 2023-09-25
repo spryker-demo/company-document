@@ -8,7 +8,6 @@
 namespace SprykerDemo\Zed\CompanyDocument\Persistence;
 
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
-use Generated\Shared\Transfer\FileTransfer;
 
 interface CompanyDocumentRepositoryInterface
 {
@@ -18,11 +17,4 @@ interface CompanyDocumentRepositoryInterface
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
     public function getCompanyDocuments(string $companyName): CompanyDocumentsCollectionTransfer;
-
-    /**
-     * @param \Generated\Shared\Transfer\FileTransfer $fileTransfer
-     *
-     * @return bool
-     */
-    public function checkFileNameExistence(FileTransfer $fileTransfer): bool;
 }
