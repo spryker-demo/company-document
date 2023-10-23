@@ -8,31 +8,39 @@
 namespace SprykerDemo\Zed\CompanyDocument\Persistence;
 
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
+use Generated\Shared\Transfer\CompanyDocumentTransfer;
+use Orm\Zed\Company\Persistence\Map\SpyCompanyTableMap;
+use Orm\Zed\FileManager\Persistence\Map\SpyFileDirectoryTableMap;
+use Propel\Runtime\ActiveQuery\Criteria;
 use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 
 /**
  * @method \SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentPersistenceFactory getFactory()
  */
-class CompanyDocumentRepository extends AbstractRepository implements CompanyDocumentRepositoryInterface
+class CompanyDocumentRepository extends AbstractRepository
 {
     /**
-     * @param string $companyName
+     * @module FileManager
+     * @module Company
+     *
+     * @param array<int> $fileIds
      *
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function getCompanyDocuments(string $companyName): CompanyDocumentsCollectionTransfer
+    public function findCompanyDocumentsByIds(array $fileIds): CompanyDocumentsCollectionTransfer
     {
-        $spyFileEntities = $this->getFactory()
+        $query = $this->getFactory()
             ->getFileQuery()
-            ->joinWithSpyFileInfo()
-            ->joinWithFileDirectory()
-                ->useFileDirectoryQuery()
-                    ->filterByName($companyName)
-                ->endUse()
-            ->find();
+            ->joinFileDirectory()
+            ->joinSpyFileInfo()
+            ->addJoin(SpyFileDirectoryTableMap::COL_NAME, SpyCompanyTableMap::COL_NAME, Criteria::INNER_JOIN)
+            ->withColumn(SpyCompanyTableMap::COL_ID_COMPANY, CompanyDocumentTransfer::ID_COMPANY)
+            ->filterByIdFile($fileIds, Criteria::IN);
+
+        $fileEntities = $query->find();
 
         return $this->getFactory()
             ->createCompanyDocumentMapper()
-            ->mapSpyFileEntitiesToCompanyDocumentsCollectionTransfer($spyFileEntities);
+            ->mapFileEntitiesToCompanyDocumentsCollectionTransfer($fileEntities, new CompanyDocumentsCollectionTransfer());
     }
 }

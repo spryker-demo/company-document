@@ -7,20 +7,23 @@
 
 namespace SprykerDemo\Zed\CompanyDocument\Business;
 
-use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 
+/**
+ * @method \SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentRepository getRepository()
+ */
 interface CompanyDocumentFacadeInterface
 {
     /**
      * Specification:
-     * - Gets all documents inside a folder with the same company name.
+     * - Gets a collection of company documents by company document ids.
+     * - Company document ids are the same as file ids.
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\CompanyDocumentRequestTransfer $companyDocumentRequestTransfer
+     * @param array<int> $companyDocumentIds
      *
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function getCompanyDocumentsCollection(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentsCollectionTransfer;
+    public function findCompanyDocumentsByIds(array $companyDocumentIds): CompanyDocumentsCollectionTransfer;
 }

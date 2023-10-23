@@ -37,9 +37,9 @@ class CompanyDocumentDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addFileQuery(Container $container): Container
     {
-        $container->set(static::QUERY_FILE, function () {
+        $container->set(static::QUERY_FILE, $container->factory(function () {
             return SpyFileQuery::create();
-        });
+        }));
 
         return $container;
     }

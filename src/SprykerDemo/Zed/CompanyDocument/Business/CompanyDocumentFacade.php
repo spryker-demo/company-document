@@ -7,12 +7,11 @@
 
 namespace SprykerDemo\Zed\CompanyDocument\Business;
 
-use Generated\Shared\Transfer\CompanyDocumentRequestTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
- * @method \SprykerDemo\Zed\CompanyDocument\Business\CompanyDocumentBusinessFactory getFactory()
+ * @method \SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentRepository getRepository()
  */
 class CompanyDocumentFacade extends AbstractFacade implements CompanyDocumentFacadeInterface
 {
@@ -21,14 +20,12 @@ class CompanyDocumentFacade extends AbstractFacade implements CompanyDocumentFac
      *
      * @api
      *
-     * @param \Generated\Shared\Transfer\CompanyDocumentRequestTransfer $companyDocumentRequestTransfer
+     * @param array<int> $companyDocumentIds
      *
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function getCompanyDocumentsCollection(CompanyDocumentRequestTransfer $companyDocumentRequestTransfer): CompanyDocumentsCollectionTransfer
+    public function findCompanyDocumentsByIds(array $companyDocumentIds): CompanyDocumentsCollectionTransfer
     {
-        return $this->getFactory()
-            ->createCompanyDocumentReader()
-            ->getCompanyDocumentsCollection($companyDocumentRequestTransfer);
+        return $this->getRepository()->findCompanyDocumentsByIds($companyDocumentIds);
     }
 }

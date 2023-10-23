@@ -1,0 +1,6 @@
+{
+    "include": {
+        "spryker/company": "Provides company-related database query objects.",
+        "spryker/file-manager": "Provides base file manager functionality."
+    }
+}
