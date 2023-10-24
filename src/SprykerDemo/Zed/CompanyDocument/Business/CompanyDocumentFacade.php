@@ -26,6 +26,6 @@ class CompanyDocumentFacade extends AbstractFacade implements CompanyDocumentFac
      */
     public function getCompanyDocumentsCollectionByCompanyDocumentIds(array $companyDocumentIds): CompanyDocumentsCollectionTransfer
     {
-        return $this->getRepository()->findCompanyDocumentsByIds($companyDocumentIds);
+        return $this->getRepository()->getCompanyDocumentsByIds($companyDocumentIds);
     }
 }

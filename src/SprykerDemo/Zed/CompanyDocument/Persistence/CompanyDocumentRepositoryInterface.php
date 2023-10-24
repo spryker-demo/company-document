@@ -22,5 +22,5 @@ interface CompanyDocumentRepositoryInterface
      *
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function findCompanyDocumentsByIds(array $fileIds): CompanyDocumentsCollectionTransfer;
+    public function getCompanyDocumentsByIds(array $fileIds): CompanyDocumentsCollectionTransfer;
 }
