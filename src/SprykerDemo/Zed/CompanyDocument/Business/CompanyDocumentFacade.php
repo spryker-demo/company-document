@@ -11,7 +11,7 @@ use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
 /**
- * @method \SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentRepository getRepository()
+ * @method \SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentRepositoryInterface getRepository()
  */
 class CompanyDocumentFacade extends AbstractFacade implements CompanyDocumentFacadeInterface
 {
@@ -24,7 +24,7 @@ class CompanyDocumentFacade extends AbstractFacade implements CompanyDocumentFac
      *
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function findCompanyDocumentsByIds(array $companyDocumentIds): CompanyDocumentsCollectionTransfer
+    public function getCompanyDocumentsCollectionByCompanyDocumentIds(array $companyDocumentIds): CompanyDocumentsCollectionTransfer
     {
         return $this->getRepository()->findCompanyDocumentsByIds($companyDocumentIds);
     }

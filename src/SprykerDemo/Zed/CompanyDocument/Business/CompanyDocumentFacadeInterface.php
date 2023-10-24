@@ -10,7 +10,7 @@ namespace SprykerDemo\Zed\CompanyDocument\Business;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 
 /**
- * @method \SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentRepository getRepository()
+ * @method \SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentRepositoryInterface getRepository()
  */
 interface CompanyDocumentFacadeInterface
 {
@@ -25,5 +25,5 @@ interface CompanyDocumentFacadeInterface
      *
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
-    public function findCompanyDocumentsByIds(array $companyDocumentIds): CompanyDocumentsCollectionTransfer;
+    public function getCompanyDocumentsCollectionByCompanyDocumentIds(array $companyDocumentIds): CompanyDocumentsCollectionTransfer;
 }

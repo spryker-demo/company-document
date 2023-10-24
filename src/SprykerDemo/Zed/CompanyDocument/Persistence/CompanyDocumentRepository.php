@@ -17,7 +17,7 @@ use Spryker\Zed\Kernel\Persistence\AbstractRepository;
 /**
  * @method \SprykerDemo\Zed\CompanyDocument\Persistence\CompanyDocumentPersistenceFactory getFactory()
  */
-class CompanyDocumentRepository extends AbstractRepository
+class CompanyDocumentRepository extends AbstractRepository implements CompanyDocumentRepositoryInterface
 {
     /**
      * @module FileManager
@@ -31,11 +31,11 @@ class CompanyDocumentRepository extends AbstractRepository
     {
         $query = $this->getFactory()
             ->getFileQuery()
-            ->joinFileDirectory()
-            ->joinSpyFileInfo()
+            ->joinWithFileDirectory()
+            ->joinWithSpyFileInfo()
             ->addJoin(SpyFileDirectoryTableMap::COL_NAME, SpyCompanyTableMap::COL_NAME, Criteria::INNER_JOIN)
             ->withColumn(SpyCompanyTableMap::COL_ID_COMPANY, CompanyDocumentTransfer::ID_COMPANY)
-            ->filterByIdFile($fileIds, Criteria::IN);
+            ->filterByIdFile_In($fileIds);
 
         $fileEntities = $query->find();
 

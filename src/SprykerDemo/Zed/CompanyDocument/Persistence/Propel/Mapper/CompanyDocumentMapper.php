@@ -44,10 +44,7 @@ class CompanyDocumentMapper
         $companyDocumentTransfer->setFileName($fileEntity->getFileName());
         $fileInfoEntities = $fileEntity->getSpyFileInfos();
         $companyDocumentTransfer->setCreatedAt($fileInfoEntities[0]->getCreatedAt());
-
-        if ($fileEntity->getVirtualColumn(CompanyDocumentTransfer::ID_COMPANY)) {
-            $companyDocumentTransfer->setIdCompany($fileEntity->getVirtualColumn(CompanyDocumentTransfer::ID_COMPANY));
-        }
+        $companyDocumentTransfer->setIdCompany($fileEntity->getVirtualColumn(CompanyDocumentTransfer::ID_COMPANY));
 
         return $companyDocumentTransfer;
     }
