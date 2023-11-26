@@ -6,6 +6,7 @@
         <property name="idCompany" type="int"/>
         <property name="fileName" type="string"/>
         <property name="createdAt" type="string"/>
+        <property name="publicUrl" type="string"/>
     </transfer>
 
     <transfer name="CompanyDocumentsCollection">
