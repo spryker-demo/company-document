@@ -37,6 +37,7 @@ class CompanyDocumentRepository extends AbstractRepository implements CompanyDoc
             ->withColumn(SpyCompanyTableMap::COL_ID_COMPANY, CompanyDocumentTransfer::ID_COMPANY)
             ->filterByIdFile_In($fileIds);
 
+        /** @var \Propel\Runtime\Collection\ObjectCollection $fileEntities */
         $fileEntities = $query->find();
 
         return $this->getFactory()
