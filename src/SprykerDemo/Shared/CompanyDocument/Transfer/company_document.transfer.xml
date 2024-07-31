@@ -13,4 +13,8 @@
         <property name="documents" type="CompanyDocument[]" singular="document"/>
     </transfer>
 
+    <transfer name="CompanyDocumentCriteria">
+        <property name="filter" type="Filter"/>
+    </transfer>
+
 </transfers>

@@ -7,6 +7,7 @@
 
 namespace SprykerDemo\Zed\CompanyDocument\Business;
 
+use Generated\Shared\Transfer\CompanyDocumentCriteriaTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 use Spryker\Zed\Kernel\Business\AbstractFacade;
 
@@ -27,5 +28,20 @@ class CompanyDocumentFacade extends AbstractFacade implements CompanyDocumentFac
     public function getCompanyDocumentsCollectionByCompanyDocumentIds(array $companyDocumentIds): CompanyDocumentsCollectionTransfer
     {
         return $this->getRepository()->getCompanyDocumentsByIds($companyDocumentIds);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\CompanyDocumentCriteriaTransfer $companyDocumentCriteriaTransfer
+     *
+     * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
+     */
+    public function getCompanyDocuments(
+        CompanyDocumentCriteriaTransfer $companyDocumentCriteriaTransfer
+    ): CompanyDocumentsCollectionTransfer {
+        return $this->getRepository()->getCompanyDocuments($companyDocumentCriteriaTransfer);
     }
 }

@@ -7,6 +7,7 @@
 
 namespace SprykerDemo\Zed\CompanyDocument\Persistence;
 
+use Generated\Shared\Transfer\CompanyDocumentCriteriaTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 
 /**
@@ -23,4 +24,13 @@ interface CompanyDocumentRepositoryInterface
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
     public function getCompanyDocumentsByIds(array $fileIds): CompanyDocumentsCollectionTransfer;
+
+    /**
+     * @param \Generated\Shared\Transfer\CompanyDocumentCriteriaTransfer $companyDocumentCriteriaTransfer
+     *
+     * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
+     */
+    public function getCompanyDocuments(
+        CompanyDocumentCriteriaTransfer $companyDocumentCriteriaTransfer
+    ): CompanyDocumentsCollectionTransfer;
 }

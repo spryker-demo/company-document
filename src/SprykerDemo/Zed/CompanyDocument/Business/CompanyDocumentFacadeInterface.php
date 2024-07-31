@@ -7,6 +7,7 @@
 
 namespace SprykerDemo\Zed\CompanyDocument\Business;
 
+use Generated\Shared\Transfer\CompanyDocumentCriteriaTransfer;
 use Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer;
 
 /**
@@ -26,4 +27,18 @@ interface CompanyDocumentFacadeInterface
      * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
      */
     public function getCompanyDocumentsCollectionByCompanyDocumentIds(array $companyDocumentIds): CompanyDocumentsCollectionTransfer;
+
+    /**
+     * Specification:
+     * - Gets a collection of company documents by criteria.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\CompanyDocumentCriteriaTransfer $companyDocumentCriteriaTransfer
+     *
+     * @return \Generated\Shared\Transfer\CompanyDocumentsCollectionTransfer
+     */
+    public function getCompanyDocuments(
+        CompanyDocumentCriteriaTransfer $companyDocumentCriteriaTransfer
+    ): CompanyDocumentsCollectionTransfer;
 }
